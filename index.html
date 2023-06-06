@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #top-row {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .box {
+      width: 100px;
+      height: 30px;
+      border: 1px solid yellow;
+      background-color: #4CAF50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      font-weight: bold;
+    }
+
+    .add-btn {
+      font-weight: bold;
+    }
+
+    #main-box {
+      border: 1px solid yellow;
+      background-color: #4CAF50;
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    select {
+      width: 200px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      background-color:yellowgreen;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const topRow = document.getElementById('top-row');
+      const mainBox = document.getElementById('main-box');
+      const addBtn = document.querySelector('.add-btn');
+
+      let tabCounter = 1;
+
+      addBtn.addEventListener('click', () => {
+        const newBox = document.createElement('div');
+        newBox.classList.add('box');
+        newBox.textContent = 'Tab ' + (tabCounter + 1);
+
+        topRow.insertBefore(newBox, addBtn);
+        tabCounter++;
+      });
+
+      topRow.addEventListener('click', (event) => {
+        if (event.target.classList.contains('close-btn')) {
+          const box = event.target.parentNode;
+          if (box !== mainBox) {
+            box.remove();
+            tabCounter--;
+          }
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <div id="top-row">
+    <div class="box">
+      <span class="close-btn">x</span>
+    </div>
+    <div class="box">
+      <span class="add-btn">+</span>
+    </div>
+  </div>
+  <div id="main-box">
+    <h2></h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <br>
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="">Select</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</body>
+</html>
